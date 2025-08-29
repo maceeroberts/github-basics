@@ -1,0 +1,233 @@
+---
+title: "**Updated Penguin Measurements!**"
+author: "M. Roberts"
+date: "2025-08-29"
+output: 
+  html_document:
+   toc: true
+   toc_float: true
+   toc_depth: 1
+---
+
+<style>
+table {
+ border-collapse: collapse !important;
+ border: none !important;
+}
+table th {
+ border-top: 2px solid black !important;
+ border-bottom: 2px solid black !important;
+ border-left: none !important;
+ border-right: none !important;
+}
+table td {
+ border: none !important;
+}
+table tbody tr:last-child td {
+ border-bottom: 2px solid black !important;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(leaflet)
+library(ggplot2)
+library(dplyr)
+library(palmerpenguins)
+data(penguins)
+summary(penguins)
+```
+
+
+
+# Figures
+
+[**Let's create a scatter plot looking at the relationship between body mass and bill length in Gentoo penguins**]{style="color:seagreen"}
+```{r BM & BL - Scatter Plot - Gentoo, echo=TRUE, fig.cap="*Fig 1. Scatterplot visualizing the relationship bewteen body mass(g) and bill length(mm) of Gentoo penguins including the 95% confidence intervals.*", message=FALSE, warning=FALSE}
+
+gentoo_data <- penguins %>%
+               filter(species == "Gentoo",
+                      !is.na(bill_length_mm),
+                      !is.na(body_mass_g))
+
+
+bm_bl_scatterplot_gentoo <- ggplot(gentoo_data, aes(x = body_mass_g, y = bill_length_mm)) +
+                                   geom_point(size = 2, color = "forestgreen") +
+                                   geom_smooth(method = "lm", se = TRUE, color = "darkseagreen") +
+                                   labs(x = "Body Mass (g)",
+                                        y = "Bill Length (mm)") +
+                                   theme_classic() +
+                                   theme(panel.border = element_rect(fill = NA))+
+                                   theme(axis.text = element_text(size=14, color = "black"), 
+                                   axis.title = element_text(size=14))
+
+bm_bl_scatterplot_gentoo
+
+ggsave("ghb_figures/bm_bl_scatterplot_gentoo.png")
+```
+
+
+<br><br>
+
+
+[**Now let's make bar plot looking at sex and mean flipper length in Chinstrap penguins**]{style="color:seagreen"}
+```{r Sex & mFL - Bar Plot - Chinstrap, fig.cap="*Fig 2. Bar plot comparison of mean flipper length(mm) between females and males in Chinstrap penguins; bars show mean +/- SE.*", echo=TRUE, message=FALSE, warning=FALSE}
+
+chinstrap_data <- penguins %>%
+                  filter(species == "Chinstrap",
+                      !is.na(sex),
+                      !is.na(flipper_length_mm))
+
+fl_mean <- chinstrap_data %>%
+           group_by(sex) %>%
+           summarise(fl_mean = mean(flipper_length_mm),
+                      fl_se  = sd(flipper_length_mm)/sqrt(n()))
+                     
+
+sex_mfl_barplot_chinstrap <- ggplot(fl_mean, aes(x = sex, y = fl_mean, fill = sex)) +
+                                    geom_bar(stat='identity', color = "black", width = 0.5) +
+                                    geom_errorbar(aes(ymin = fl_mean - fl_se, ymax = fl_mean + fl_se),
+                                    width = 0.2, linewidth = 0.4 ) +
+                                    scale_x_discrete(labels = c("female" = "Female", "male" = "Male")) +
+                                    scale_fill_manual(values = c("male" = "springgreen4", "female" = "palegreen3"),
+                                                      labels = c("male" = "Male", "female" = "Female")) +
+                                    theme_bw() +
+                                    theme_classic() +
+                                    theme(panel.border = element_rect(fill = NA)) +
+                                    labs(x = "Sex") +
+                                    labs(y = "Mean Flipper Length (mm)")
+
+sex_mfl_barplot_chinstrap
+
+ggsave("ghb_figures/sex_mfl_barplot_chinstrap.png")
+```
+
+
+<br><br>
+
+
+[**Now that we have created a bar plot, let's make a histogram looking at bill depth of Adelie penguins**]{style="color:seagreen"}
+```{r BD - Histogram - Adelie, fig.cap="*Fig 3. Distribution of bill depths(mm) in Adelie penguins.*", echo=TRUE}
+
+adelie_data <- penguins %>%
+               filter(species == "Adelie",
+                      !is.na(bill_depth_mm))
+
+bd_hist_adelie <- hist(adelie_data$bill_depth_mm,
+                       col = "darkolivegreen2",
+                       xlab = "Bill Depth (mm)",
+                       xlim = c(15, 22),
+                       ylim = c(0, 30),
+                       main = "")
+```
+
+```{r PNG BD - Histogram - Adelie, message=FALSE, warning=FALSE, include=FALSE}
+
+png("bd_hist_adelie.png", width = 1400, height = 1200, res = 300)
+hist(adelie_data$bill_depth_mm,
+                 col = "darkolivegreen2",
+                 xlab = "Bill Depth (mm)",
+                 xlim = c(15, 22),
+                 ylim = c(0, 30),
+                 main = "")
+dev.off()
+```
+
+
+<br><br>
+<br><br>
+
+
+# Tables
+
+[**Let's dive into some tables looking at yearly means of bill length and bill depth with standard deviation in Gentoo penguins**]{style="color:darkturquoise"}
+```{r Years - Table - Gentoo, echo=TRUE}
+
+gentoo_data <- penguins %>%
+               filter(species == "Gentoo",
+                      !is.na(bill_length_mm),
+                      !is.na(bill_depth_mm))
+
+means_sd_yearly <- gentoo_data %>%
+                   group_by(year) %>%
+                   summarise("Mean Bill Length (mm)" = round(mean(bill_length_mm), 2),
+                             "SD Bill Length (mm)" = round(sd(bill_length_mm), 2),
+                             "Mean Bill Depth (mm)" = round(mean(bill_depth_mm), 2),
+                             "SD Bill Depth (mm)" = round(sd(bill_depth_mm), 2),
+                             ) %>%
+                             rename(Year = year)
+
+kable(means_sd_yearly, caption = 'Table 1. A summary of yearly means of bill lengths and bill depths including standard deviation in Gentoo Penguins.')
+```
+
+
+<br><br>
+
+
+[**Now that we have looked at some yearly data for Gentoo penguins, let's turn our focus to the individual islands. We are now going to make a table looking at some variables for each island for Adelie penguins**]{style="color:darkturquoise"}
+```{r Islands - Table - Adelie, echo=TRUE}
+
+adelie_data <- penguins %>%
+               filter(species == "Adelie",
+                      !is.na(body_mass_g))
+
+means_sd_max_min_island <- adelie_data %>%
+                           group_by(island) %>%
+                           summarise("Mean Body Mass (g)" = round(mean(body_mass_g), 2),
+                                     "SD Body Mass (g)" = round(sd(body_mass_g), 2),
+                                     "Maximum Body Mass (g)" = max(body_mass_g),
+                                     "Minimum Body Mass (g)" = min(body_mass_g),
+                                     ) %>%
+                                     rename(Island = island)
+
+kable(means_sd_max_min_island, caption = 'Table 2. A summary of body mass measurements of Adelie penguins on different islands.')
+```
+
+
+<br><br>
+<br><br>
+
+
+# Maps
+
+**After we have created some tables, let's visualize where these islands and Palmer Station are located on a map**
+
+[Biscoe Island is indicated on the map by blue.]{style="color:blue"}
+
+[Dream Island is indicated on the map by red.]{style="color:red"}
+
+[Torgersen Island is indicated on the map by green.]{style="color:green"}
+
+[Palmer Station is indicated on the map by orange.]{style="color:orange"}
+
+```{r Map, echo=TRUE}
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(lng = -65.92340, lat = -65.73258,
+             color = "blue", fill = "blue") %>%
+  addCircleMarkers(lng = -64.24054, lat = -64.73097, 
+             color = "red", fill = "red") %>%
+  addCircleMarkers(lng = -64.07895, lat = -64.76612, 
+             color = "green", fill = "green") %>%
+  addCircleMarkers(lng = -64.05357, lat = -64.77419,
+             color = "orange", fill = "orange")
+```
+
+
+<br><br>
+<br><br>
+
+
+# Video
+
+
+[**Let's take a look at some penguin interactions in Antarctica during breeding season**]{style="color:dodgerblue"}
+
+<iframe width="610" height="348" src="https://www.youtube.com/embed/lM02wDTiX34" data-external="1">
+
+</iframe>
+
+# Hello
