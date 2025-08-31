@@ -11,9 +11,9 @@
 
 <meta name="author" content="M. Roberts" />
 
-<meta name="date" content="2025-08-29" />
+<meta name="date" content="2025-08-26" />
 
-<title>Updated Penguin Measurements!</title>
+<title>Updated Penguin Measurements</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -5540,10 +5540,9 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore"><strong>Updated Penguin
-Measurements!</strong></h1>
+<h1 class="title toc-ignore">Updated Penguin Measurements</h1>
 <h4 class="author">M. Roberts</h4>
-<h4 class="date">2025-08-29</h4>
+<h4 class="date">2025-08-26</h4>
 
 </div>
 
@@ -5566,6 +5565,7 @@ table tbody tr:last-child td {
 border-bottom: 2px solid black !important;
 }
 </style>
+<p><br><br></p>
 <div id="figures" class="section level1">
 <h1>Figures</h1>
 <p><span style="color:seagreen"><strong>Let’s create a scatter plot
@@ -5597,9 +5597,9 @@ intervals.</em>
 </p>
 </div>
 <pre class="r"><code>ggsave(&quot;ghb_figures/bm_bl_scatterplot_gentoo.png&quot;)</code></pre>
-<p><br><br></p>
-<p><span style="color:seagreen"><strong>Now let’s make bar plot looking
-at sex and mean flipper length in Chinstrap penguins</strong></span></p>
+<p><br><br> <span style="color:seagreen"><strong>Now let’s make bar plot
+looking at sex and mean flipper length in Chinstrap
+penguins</strong></span></p>
 <pre class="r"><code>chinstrap_data &lt;- penguins %&gt;%
                   filter(species == &quot;Chinstrap&quot;,
                       !is.na(sex),
@@ -5633,10 +5633,9 @@ females and males in Chinstrap penguins; bars show mean +/- SE.</em>
 </p>
 </div>
 <pre class="r"><code>ggsave(&quot;ghb_figures/sex_mfl_barplot_chinstrap.png&quot;)</code></pre>
-<p><br><br></p>
-<p><span style="color:seagreen"><strong>Now that we have created a bar
-plot, let’s make a histogram looking at bill depth of Adelie
-penguins</strong></span></p>
+<p><br><br> <span style="color:seagreen"><strong>Now that we have
+created a bar plot, let’s make a histogram looking at bill depth of
+Adelie penguins</strong></span></p>
 <pre class="r"><code>adelie_data &lt;- penguins %&gt;%
                filter(species == &quot;Adelie&quot;,
                       !is.na(bill_depth_mm))
@@ -5718,10 +5717,9 @@ depths including standard deviation in Gentoo Penguins.</caption>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<p><span style="color:darkturquoise"><strong>Now that we have looked at
-some yearly data for Gentoo penguins, let’s turn our focus to the
-individual islands. We are now going to make a table looking at some
+<p><br><br> <span style="color:darkturquoise"><strong>Now that we have
+looked at some yearly data for Gentoo penguins, let’s turn our focus to
+the individual islands. We are now going to make a table looking at some
 variables for each island for Adelie penguins</strong></span></p>
 <pre class="r"><code>adelie_data &lt;- penguins %&gt;%
                filter(species == &quot;Adelie&quot;,
@@ -5804,15 +5802,15 @@ orange.</span></p>
              color = &quot;green&quot;, fill = &quot;green&quot;) %&gt;%
   addCircleMarkers(lng = -64.05357, lat = -64.77419,
              color = &quot;orange&quot;, fill = &quot;orange&quot;)</code></pre>
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-a8b6e468d2761a96eeb5" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-a8b6e468d2761a96eeb5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[-65.73258,-65.9234,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":"blue","fillColor":"blue","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[-64.73097,-64.24054,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":5,"opacity":0.5,"fill":"red","fillColor":"red","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[-64.76612,-64.07895000000001,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"green","weight":5,"opacity":0.5,"fill":"green","fillColor":"green","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[-64.77419,-64.05356999999999,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"orange","weight":5,"opacity":0.5,"fill":"orange","fillColor":"orange","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-65.73258,-64.73097],"lng":[-65.9234,-64.05356999999999]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-f5edfe2a6c2af469f8ed" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-f5edfe2a6c2af469f8ed">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[-65.73258,-65.9234,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":"blue","fillColor":"blue","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[-64.73097,-64.24054,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"red","weight":5,"opacity":0.5,"fill":"red","fillColor":"red","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[-64.76612,-64.07895000000001,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"green","weight":5,"opacity":0.5,"fill":"green","fillColor":"green","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[-64.77419,-64.05356999999999,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"orange","weight":5,"opacity":0.5,"fill":"orange","fillColor":"orange","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-65.73258,-64.73097],"lng":[-65.9234,-64.05356999999999]}},"evals":[],"jsHooks":[]}</script>
 <p><br><br> <br><br></p>
 </div>
 <div id="video" class="section level1">
 <h1>Video</h1>
-<p><span style="color:dodgerblue"><strong>Let’s take a look at some
+<p><span style="color:steelblue"><strong><em>Let’s take a look at some
 penguin interactions in Antarctica during breeding
-season</strong></span></p>
+season</em></strong></span></p>
 <iframe width="610" height="348" src="https://www.youtube.com/embed/lM02wDTiX34" data-external="1">
 </iframe>
 </div>
@@ -5866,7 +5864,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1",
+      selectors: "h1,h2",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
