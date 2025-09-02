@@ -1,5 +1,7 @@
 # Project file
 *.Rproj
+*.Rmd
+previous_index.html
 
 # History files
 .Rhistory
@@ -8,6 +10,7 @@
 # Session Data files
 .RData
 .RDataTmp
+*.png
 
 # User-specific files
 .Ruserdata
